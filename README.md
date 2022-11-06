@@ -1,5 +1,5 @@
 # Vector3D
-Some three dimensional vector stuff. Latest addition is rotation in 3D space, requires two elements, **rotation axis** and the **angle**. The later could be in either degree or radians, just need to specify so to any of the functions to rotate a vector. Threre's six functions to rotate vectors in total, three of them assume the unitary vector for the specific axis, the other three may take an arbitrary vector for the rotation axis.
+Some three dimensional vector stuff. Latest addition is rotation in 3D space, requires two elements, **rotation axis** and the **angle**. The later could be in either degree or radians, just need to specify so to any of the functions to rotate a vector. Threre's six functions to rotate vectors in total, three of them assume the unitary vector for the specific axis ([1, 0, 0] for X axis, [0, 1, 0] for Y axis and [0, 0, 1] for Z axis), the other three may take an arbitrary vector for the rotation axis.
 
 # Example execution:
 

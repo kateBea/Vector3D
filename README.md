@@ -29,6 +29,7 @@ Is the angle in degrees? [Y/Yes] : [N/No] -> No
 ```
 
 # Visualization:
+Corresponds to the piece of execution above.
 ![rotate Z axis 3.7 rad](/img/img1.png)
 
 

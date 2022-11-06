@@ -55,7 +55,8 @@ int main(int argc, __attribute__((unused)) char** argv) {
     float angle;    // angle fo rotation
     bool degree;    // angle in degrees?
     bool run;       // run loop flag
-
+    
+#if 0
     readVector3D(&op1);
     readVector3D(&op2);
 
@@ -65,6 +66,7 @@ int main(int argc, __attribute__((unused)) char** argv) {
 
     temp = crossPrdoct(op1, op2);
     printVector3D(&temp);
+#endif
 
     printf("******* VECTOR ROTATION *******\n");
 

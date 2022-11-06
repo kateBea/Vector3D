@@ -1,6 +1,19 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define _USE_MATH_DEFINES
+
 #include <math.h>
+
+/***************************************************/
+/*                    CONSTANTS                    */
+/***************************************************/
+
+// for vector rotation
+static const float conversionFactor = M_PI / 180.0f;
+
 
 /***************************************************/
 /*                  DEFINITIONS                    */
@@ -19,6 +32,10 @@ struct Vector3D crossPrdoct(struct Vector3D v1, struct Vector3D v2);
 struct Vector3D productByScalar(struct Vector3D v1, long signed int scalar);
 struct Vector3D normalize(struct Vector3D v1);
 
+void rotateYaxis(struct Vector3D* v1, float angle, bool degree);
+void rotateXaxis(struct Vector3D* v1, float angle, bool degree);
+void rotateZaxis(struct Vector3D* v1, float angle, bool degree);
+
 void readVector3D(struct Vector3D* v1);
 void printVector3D(struct Vector3D* v1);
 
@@ -28,19 +45,71 @@ void usage(void);
 int main(int argc, __attribute__((unused)) char** argv) {
     if (argc != 1)
         usage();
-
+        
+    char axis;
+    char answer[64];
     struct Vector3D op1;
     struct Vector3D op2;
     struct Vector3D temp;
 
+    float angle;    // angle fo rotation
+    bool degree;    // angle in degrees?
+    bool run;       // run loop flag
+
     readVector3D(&op1);
     readVector3D(&op2);
+
 
     printVector3D(&op1);
     printVector3D(&op2);
 
     temp = crossPrdoct(op1, op2);
     printVector3D(&temp);
+
+    printf("******* VECTOR ROTATION *******\n");
+
+    run = true;
+    while (run) {
+
+        readVector3D(&op1);
+        printVector3D(&op1);
+
+        printf("1. Rotate X axis [X]\n"
+        "2. Rotate Y axis [Y]\n"
+        "3. Rotate Z axis [Z]\n"
+        "4. Exit [E]\n");
+
+        // trialing endline
+        getchar();
+
+        printf("Axis: ");
+        scanf("%c", &axis);
+
+
+        printf("Angle: ");
+        scanf("%f", &angle);
+
+        printf("Is the angle in degrees? [Y/Yes] : [N/No] -> ");
+        scanf("%s", answer);
+        degree = !strcmp(answer, "Yes") || !strcmp(answer, "Y");
+
+        switch (axis) {
+            case 'X':
+                rotateXaxis(&op1, angle, degree);
+                break;
+            case 'Y':
+                rotateYaxis(&op1, angle, degree);
+                break;
+            case 'Z':
+                rotateZaxis(&op1, angle, degree);
+                break;
+            default:
+                run = false;
+                break;
+        }
+
+        printVector3D(&op1);
+    }
 
     return 0;
 }
@@ -91,7 +160,6 @@ struct Vector3D crossPrdoct(struct Vector3D v1, struct Vector3D v2) {
     return temp;
 }
 
-
 struct Vector3D productByScalar(struct Vector3D v1, long signed int scalar) {
     struct Vector3D temp;
 
@@ -111,6 +179,33 @@ struct Vector3D normalize(struct Vector3D v1) {
     temp.zAxis = v1.zAxis / l1;
 
     return temp;
+}
+
+void rotateXaxis(struct Vector3D* v1, float angle, bool degree) {
+    // angle units in degrees if degree, in radians otherwise
+    if (degree)
+        angle = angle * conversionFactor;
+
+    v1->yAxis = ((float)cos(angle) * v1->yAxis) - ((float)sin(angle) * v1->zAxis);
+    v1->zAxis = ((float)sin(angle) * v1->yAxis) + ((float)cos(angle) * v1->zAxis);
+}
+
+void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
+    // angle units in degrees if degree, in radians otherwise
+    if (degree)
+        angle = angle * conversionFactor;
+
+    v1->xAxis = ((float)cos(angle) * v1->xAxis) + ((float)sin(angle) * v1->zAxis);
+    v1->zAxis = ((float)(-sin(angle)) * v1->xAxis) + ((float)cos(angle) * v1->zAxis);
+}
+
+void rotateZaxis(struct Vector3D* v1, float angle, bool degree) {
+    // angle units in degrees if degree, in radians otherwise
+    if (degree)
+        angle = angle * conversionFactor;
+
+    v1->xAxis = ((float)cos(angle) * v1->xAxis) - ((float)sin(angle) * v1->yAxis);
+    v1->yAxis = ((float)sin(angle) * v1->xAxis) + ((float)cos(angle) * v1->yAxis);
 }
 
 void readVector3D(struct Vector3D* v1) {

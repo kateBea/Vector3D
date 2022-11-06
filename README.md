@@ -29,4 +29,5 @@ Is the angle in degrees? [Y/Yes] : [N/No] -> No
 ```
 
 # Visualization:
-
+[(rotate Z axis 3.7 rad)](https://github.com/kateBea/Vector3D/tree/main/img/img1.png)
+[(rotate Z axis 2.8 rad)](https://github.com/kateBea/Vector3D/tree/main/img/img2.png)

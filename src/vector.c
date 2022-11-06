@@ -45,7 +45,7 @@ void usage(void);
 int main(int argc, __attribute__((unused)) char** argv) {
     if (argc != 1)
         usage();
-        
+
     char axis;
     char answer[64];
     struct Vector3D op1;
@@ -186,8 +186,10 @@ void rotateXaxis(struct Vector3D* v1, float angle, bool degree) {
     if (degree)
         angle = angle * conversionFactor;
 
+    // rotate axis (1, 0, 0)
+    float temp = v1->yAxis;
     v1->yAxis = ((float)cos(angle) * v1->yAxis) - ((float)sin(angle) * v1->zAxis);
-    v1->zAxis = ((float)sin(angle) * v1->yAxis) + ((float)cos(angle) * v1->zAxis);
+    v1->zAxis = ((float)sin(angle) * temp) + ((float)cos(angle) * v1->zAxis);
 }
 
 void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
@@ -195,8 +197,10 @@ void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
     if (degree)
         angle = angle * conversionFactor;
 
+    // rotate axis (0, 1, 0)
+    float temp = v1->xAxis;
     v1->xAxis = ((float)cos(angle) * v1->xAxis) + ((float)sin(angle) * v1->zAxis);
-    v1->zAxis = ((float)(-sin(angle)) * v1->xAxis) + ((float)cos(angle) * v1->zAxis);
+    v1->zAxis = ((float)(-sin(angle)) * temp) + ((float)cos(angle) * v1->zAxis);
 }
 
 void rotateZaxis(struct Vector3D* v1, float angle, bool degree) {
@@ -204,8 +208,10 @@ void rotateZaxis(struct Vector3D* v1, float angle, bool degree) {
     if (degree)
         angle = angle * conversionFactor;
 
+    // rotate axis (0, 0, 1)
+    float temp = v1->xAxis;
     v1->xAxis = ((float)cos(angle) * v1->xAxis) - ((float)sin(angle) * v1->yAxis);
-    v1->yAxis = ((float)sin(angle) * v1->xAxis) + ((float)cos(angle) * v1->yAxis);
+    v1->yAxis = ((float)sin(angle) * temp) + ((float)cos(angle) * v1->yAxis);
 }
 
 void readVector3D(struct Vector3D* v1) {

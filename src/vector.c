@@ -210,19 +210,6 @@ void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
     v1->zAxis = ((float)(-sin(angle)) * v1->xAxis) + ((float)cos(angle) * v1->zAxis);
 }
 
-
-
-void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
-    // angle units in degrees if degree, in radians otherwise
-    if (degree)
-        angle = angle * conversionFactor;
-
-    // rotate axis (0, 1, 0)
-    float temp = v1->xAxis;
-    v1->xAxis = ((float)cos(angle) * v1->xAxis) + ((float)sin(angle) * v1->zAxis);
-    v1->zAxis = ((float)(-sin(angle)) * temp) + ((float)cos(angle) * v1->zAxis);
-}
-
 void rotateZaxis(struct Vector3D* v1, float angle, bool degree) {
     // angle units in degrees if degree, in radians otherwise
     if (degree)

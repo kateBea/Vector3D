@@ -36,6 +36,10 @@ void rotateYaxis(struct Vector3D* v1, float angle, bool degree);
 void rotateXaxis(struct Vector3D* v1, float angle, bool degree);
 void rotateZaxis(struct Vector3D* v1, float angle, bool degree);
 
+void rotateYaxisVector(struct Vector3D* v1, float angle, bool degree);
+void rotateXaxis(struct Vector3D* v1, float angle, bool degree);
+void rotateZaxis(struct Vector3D* v1, float angle, bool degree);
+
 void readVector3D(struct Vector3D* v1);
 void printVector3D(struct Vector3D* v1);
 
@@ -55,7 +59,7 @@ int main(int argc, __attribute__((unused)) char** argv) {
     float angle;    // angle fo rotation
     bool degree;    // angle in degrees?
     bool run;       // run loop flag
-    
+
 #if 0
     readVector3D(&op1);
     readVector3D(&op2);
@@ -193,6 +197,20 @@ void rotateXaxis(struct Vector3D* v1, float angle, bool degree) {
     v1->yAxis = ((float)cos(angle) * v1->yAxis) - ((float)sin(angle) * v1->zAxis);
     v1->zAxis = ((float)sin(angle) * temp) + ((float)cos(angle) * v1->zAxis);
 }
+
+
+
+void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
+    // angle units in degrees if degree, in radians otherwise
+    if (degree)
+        angle = angle * conversionFactor;
+
+    // rotate axis (0, 1, 0)
+    v1->xAxis = ((float)cos(angle) * v1->xAxis) + ((float)sin(angle) * v1->zAxis);
+    v1->zAxis = ((float)(-sin(angle)) * v1->xAxis) + ((float)cos(angle) * v1->zAxis);
+}
+
+
 
 void rotateYaxis(struct Vector3D* v1, float angle, bool degree) {
     // angle units in degrees if degree, in radians otherwise

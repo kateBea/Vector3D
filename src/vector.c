@@ -36,9 +36,9 @@ void rotateYaxis(struct Vector3D* v1, float angle, bool degree);
 void rotateXaxis(struct Vector3D* v1, float angle, bool degree);
 void rotateZaxis(struct Vector3D* v1, float angle, bool degree);
 
-void rotateYaxisVector(struct Vector3D* v1, float angle, bool degree);
-void rotateXaxis(struct Vector3D* v1, float angle, bool degree);
-void rotateZaxis(struct Vector3D* v1, float angle, bool degree);
+void rotateYaxisVector(struct Vector3D* v1, struct Vector3D* axis, float angle, bool degree);
+void rotateXaxisVector(struct Vector3D* v1, struct Vector3D* axis, float angle, bool degree);
+void rotateZaxisVector(struct Vector3D* v1, struct Vector3D* axis, float angle, bool degree);
 
 void readVector3D(struct Vector3D* v1);
 void printVector3D(struct Vector3D* v1);

@@ -1,5 +1,4 @@
 # vars
-PROGRAM_NAME_CXX = vector_move_ctor.cc
 PROGRAM_NAME_C = vector.c
 EXECUTABLE_NAME = vector
 MATH_LIB = -lm
